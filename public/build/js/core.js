@@ -60,9 +60,9 @@ var $cardIngame = $('#card-ingame'),
     $cardAccount = $('#card-account'),
     $cardChar = $('#card-char'),
     $cardPrice = $('#card-price'),
-    $cardReward = $('#card-reward'),
     $cardClaim = $('#card-claim'),
-    $cardReward = $('#card-reward'),
+    $cardCharFee = $('#card-char-fee'),
+    $cardWeapFee = $('#card-weap-fee'),
     $cardSouls = $('#card-souls'),
     $convIngame = $('#conv-ingame'),
     $convUnclaim = $('#conv-unclaim'),
@@ -70,7 +70,9 @@ var $cardIngame = $('#card-ingame'),
     $convWallet = $('#conv-wallet'),
     $convTotal = $('#conv-total'),
     $convBnb = $('#conv-bnb'),
-    $convPrice = $('#conv-price')
+    $convPrice = $('#conv-price'),
+    $convCharFee = $('#conv-char-fee'),
+    $convWeapFee = $('#conv-weap-fee')
 
 $('document').ready(async () => {
     priceTicker()
@@ -107,6 +109,8 @@ function fiatConversion() {
     if (isElementNotZero($cardTotal)) $convTotal.html(`(${toLocaleCurrency(convertToFiat($cardTotal.html()))})`)
     if (isElementNotZero($cardBnb)) $convBnb.html(`(${toLocaleCurrency(convertBnbToFiat($cardBnb.html()))})`)
     if (isElementNotZero($cardPrice) && currCurrency !== 'usd') $convPrice.html(`(${toLocaleCurrency(localPrice)})`)
+    if (isElementNotZero($cardCharFee)) $convCharFee.html(`(${toLocaleCurrency(convertToFiat($cardCharFee.html()))})`)
+    if (isElementNotZero($cardWeapFee)) $convWeapFee.html(`(${toLocaleCurrency(convertToFiat($cardWeapFee.html()))})`)
 }
 function clearFiat() {
     $convIngame.html('')
@@ -116,6 +120,8 @@ function clearFiat() {
     $convTotal.html('')
     $convBnb.html('')
     $convPrice.html('')
+    $convCharFee.html('')
+    $convWeapFee.html('')
 }
 
 function isElementNotZero($elem) {
@@ -369,11 +375,13 @@ async function priceTicker() {
 }
 
 async function statTicker() {
-    const hourlyAvgPower = await getHourlyPowerAvg()
+    const charFee = await getCharacterMintFee()
+    const weapFee = await getWeaponMintFee()
     const skillPartnerId = await getSkillPartnerId()
     const maxClaim = skillPartnerId ? await getSkillMultiplier(skillPartnerId) : 0
 
-    $cardReward.html(Number(hourlyAvgPower).toLocaleString('en-US'))
+    $cardCharFee.html(Number(charFee).toLocaleString('en-US'))
+    $cardWeapFee.html(Number(weapFee).toLocaleString('en-US'))
     $cardClaim.html(parseFloat(fromEther(maxClaim)).toFixed(6))
 }
 

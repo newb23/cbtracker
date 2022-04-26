@@ -244,6 +244,18 @@ var getReputationTier = (reputation, reputationLevelRequirements) => {
     }
 }
 
+var getCharacterMintFee = async () => {
+  const cost = await conCryptoBlades.methods.getMintCharacterFee().call();
+  const usdCost = await conCryptoBlades.methods.usdToSkill(cost).call();
+  return fromEther(usdCost);
+}
+
+var getWeaponMintFee = async () => {
+  const cost = await conCryptoBlades.methods.getMintWeaponFee().call();
+  const usdCost = await conCryptoBlades.methods.usdToSkill(cost).call();
+  return fromEther(usdCost);
+}
+
 var multicall = async ({abi, calls}) => {
     const { Interface } = ethers.utils
     const itf = new Interface(abi);

@@ -2,7 +2,7 @@ main.page-wrapper
   include ../includes/menu
   section.position-relative.zindex-5.pb-4.mb-md-3.mx-5.pt-6
     .row
-      include ../includes/alerts      
+      include ../includes/alerts
     .row.mx-n2.py-2
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
@@ -37,16 +37,16 @@ main.page-wrapper
     .row.mx-n2.py-2
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Total Accounts
-          span#card-account.h4.text-white 0
-      .col-md-2.col-sm-6.px-2.mb-3
-        .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Total Characters
-          span#card-char.h4.text-white 0
+          h6.fs-sm.fw-medium.text-muted Total Accounts & Characters
+          span.mr-2.h4.text-white
+            span#card-account(style='padding-right: 5px !important;') 0
+            | (
+            span#card-char 0
+            | )
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
           h6.fs-sm.fw-medium.text-muted Total Souls Remaining
-          span#card-souls.h4.text-white 
+          span#card-souls.h4.text-white
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
           h6.fs-sm.fw-medium.text-muted Current Skill Price
@@ -58,9 +58,14 @@ main.page-wrapper
           span#card-claim.h4.text-white 0
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Hourly Average Power
-          span#card-reward.h4.text-white 0
-          span#conv-reward.mb-2.text-white.card-label
+          h6.fs-sm.fw-medium.text-muted Character Minting Fee
+          span#card-char-fee.h4.text-white 0
+          span#conv-char-fee.mb-2.text-white.card-label
+      .col-md-2.col-sm-6.px-2.mb-3
+        .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
+          h6.fs-sm.fw-medium.text-muted Weapon Minting Fee
+          span#card-weap-fee.h4.text-white 0
+          span#conv-weap-fee.mb-2.text-white.card-label
     .row.mx-n2.py-2
       .col-md-12.col-sm-126.px-2.mb-3
         .card.bg-dark
@@ -107,30 +112,30 @@ main.page-wrapper
                           | BNB Balance
                         th.text-white.align-middle(rowspan='2')
                           | Action
-                      tr 
-                        th.text-white.char-column 
+                      tr
+                        th.text-white.char-column
                           | ID
-                        th.text-white.char-column 
+                        th.text-white.char-column
                           | Level
-                        th.text-white.char-column 
+                        th.text-white.char-column
                           | Element
-                        th.text-white.char-column 
-                          | Power                        
-                        th.text-white.char-column 
+                        th.text-white.char-column
+                          | Power
+                        th.text-white.char-column
                           | Reputation
-                        th.text-white.char-column 
+                        th.text-white.char-column
                           | Unclaimed XP
-                        th.text-white.char-column 
+                        th.text-white.char-column
                           | Target Level
-                        th.text-white.char-column 
+                        th.text-white.char-column
                           | Stamina
-                        th.text-white.skill-column 
-                          | Unclaimed                         
-                        th.text-white.skill-column 
+                        th.text-white.skill-column
+                          | Unclaimed
+                        th.text-white.skill-column
                           | Claimable
-                        th.text-white.skill-column 
+                        th.text-white.skill-column
                           | Staked
-                        th.text-white.skill-column 
+                        th.text-white.skill-column
                           | Wallet
                         th.text-white.skill-column
                           | Total
