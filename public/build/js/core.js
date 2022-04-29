@@ -352,8 +352,9 @@ function renameAccount() {
 
 async function priceTicker() {
     skillPrice = await getSkillPrice()
-    gasPrice = await getGasPrice()
-
+    if (currCurrency !== 'aurora') {
+      gasPrice = await getGasPrice()
+    }
 
     if (currentNetwork === 'poly') {
         gasPrice *= 1000000000000
@@ -363,8 +364,13 @@ async function priceTicker() {
         gasPrice *= 1000000000000
         skillPrice *= 1000000000000
     }
-    $.get(`https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=${currencies.join(',')}`, async (result) => {
+    $.get(`https://api.coingecko.com/api/v3/simple/price?ids=tether,near&vs_currencies=${currencies.join(',')}`, async (result) => {
         usdPrice = result.tether[currCurrency]
+        if (currentNetwork === 'aurora') {
+          gasPrice = result['near'][currCurrency]
+          skillPrice /= 1000000
+          skillPrice *= result['near']['usd']
+        }
         bnbPrice = gasPrice * usdPrice
         if (currentNetwork === 'bnb') {
             skillPrice *= gasPrice
@@ -750,6 +756,7 @@ function gasName(network) {
         case 'oec': return 'OKT'
         case 'poly': return 'MATIC'
         case 'avax': return 'AVAX'
+        case 'aurora': return 'NEAR'
         default: return 'BNB'
     }
 }
