@@ -756,7 +756,7 @@ function gasName(network) {
         case 'oec': return 'OKT'
         case 'poly': return 'MATIC'
         case 'avax': return 'AVAX'
-        case 'aurora': return 'NEAR'
+        case 'aurora': return 'AETH'
         default: return 'BNB'
     }
 }

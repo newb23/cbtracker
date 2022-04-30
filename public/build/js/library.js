@@ -116,7 +116,7 @@ var conAddress = {
         skillStaking30: '',
         skillStaking90: '',
         skillStaking180: '',
-        quest: '',
+        quest: '0x89995f8C61d7366119773Ac791e9B427e1B63a4A',
         pvp: '0x0760d5F88b2ACA0aD387eb855Ac532090c208588',
         raid: '0x6CFDF6237C2A857f42Ff948b9117B0FA990bD42C',
         garrison: '0x59dd354428B308055A19EdaA501b4df29970B58B'
