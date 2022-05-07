@@ -1,4 +1,4 @@
-var networks = ['bnb', 'heco', 'oec', 'poly', 'avax']
+var networks = ['bnb', 'heco', 'oec', 'poly', 'avax', 'aurora']
 
 var conAddress = {
     bnb: {
@@ -100,6 +100,26 @@ var conAddress = {
         pvp: '0xC4Ca6D299ed56318FcB30344f47F5763aFB3c396',
         raid: '0xbAC6B71a5bC3517Bee588299980B3C357a518e5C',
         garrison: '0xB861C1196BEb96856FD0733Bba108304b1B51806'
+    },
+    aurora: {
+        staking: '0x5F6E97612482095C0c2C02BC495C0171e61017d7',
+        token: '0xE723111a6Ac865EB6E2d62e87432bdC6e2c4a86E',
+        cryptoBlades: '0x3F715995647fe44Db45411bb9e81b7A1aD5A8387',
+        character: '0x3A7279866A6e7e9f86c5Afd5696131E5C92956af',
+        weapon: '0x48bdd9a266fF01eEb81b1F89daB76b3816Ee848a',
+        shield: '0xb29076d3cfbA902d8D1d1A53BF57CC696098839e',
+        market: '0x99a7f36493B7ae8DC55F5F96A22cDBc27d049c55',
+        skillPair: '0xe8aAF8F8114009D116A0cb9A96B0AC7aBF9A3A99',
+        tokenPair: '',
+        treasury: '0x483416eB3aFA601B9C6385f63CeC0C82B6aBf1fb',
+        multicall: '0x1687dF400C7D1A34734E91F463CD80bA74B8A9F0',
+        skillStaking30: '',
+        skillStaking90: '',
+        skillStaking180: '',
+        quest: '0x89995f8C61d7366119773Ac791e9B427e1B63a4A',
+        pvp: '0x0760d5F88b2ACA0aD387eb855Ac532090c208588',
+        raid: '0x6CFDF6237C2A857f42Ff948b9117B0FA990bD42C',
+        garrison: '0x59dd354428B308055A19EdaA501b4df29970B58B'
     }
 }
 
@@ -108,7 +128,8 @@ var nodes = {
     heco: 'https://http-mainnet.hecochain.com',
     oec: 'https://exchainrpc.okex.org',
     poly: 'https://polygon-rpc.com/',
-    avax: 'https://api.avax.network/ext/bc/C/rpc'
+    avax: 'https://api.avax.network/ext/bc/C/rpc',
+    aurora: 'https://mainnet.aurora.dev'
 }
 
 var currentNetwork = localStorage.getItem('network')
@@ -129,7 +150,7 @@ var conShields = new web3.eth.Contract(Shields, conAddress[currentNetwork].shiel
 var conMarket = new web3.eth.Contract(NFTMarket, conAddress[currentNetwork].market);
 var conTreasury = new web3.eth.Contract(Treasury, conAddress[currentNetwork].treasury)
 var skillPair = new web3.eth.Contract(SwapPair, conAddress[currentNetwork].skillPair)
-var gasPair = new web3.eth.Contract(SwapPair, conAddress[currentNetwork].tokenPair)
+var gasPair = (currentNetwork !== 'aurora' ? new web3.eth.Contract(SwapPair, conAddress[currentNetwork].tokenPair): null)
 var conMultiCall = new web3.eth.Contract(MultiCall, conAddress[currentNetwork].multicall)
 var conPvp = new web3.eth.Contract(PvpArena, conAddress[currentNetwork].pvp)
 var conRaid = new web3.eth.Contract(Raid, conAddress[currentNetwork].raid)
@@ -244,6 +265,18 @@ var getReputationTier = (reputation, reputationLevelRequirements) => {
     }
 }
 
+var getCharacterMintFee = async () => {
+  const cost = await conCryptoBlades.methods.getMintCharacterFee().call();
+  const usdCost = await conCryptoBlades.methods.usdToSkill(cost).call();
+  return fromEther(usdCost);
+}
+
+var getWeaponMintFee = async () => {
+  const cost = await conCryptoBlades.methods.getMintWeaponFee().call();
+  const usdCost = await conCryptoBlades.methods.usdToSkill(cost).call();
+  return fromEther(usdCost);
+}
+
 var multicall = async ({abi, calls}) => {
     const { Interface } = ethers.utils
     const itf = new Interface(abi);
@@ -269,14 +302,17 @@ var getNFTCall = (abi, address, name, params) => ({
 
 var getSkillPrice = async () => {
     const reserves = await skillPair.methods.getReserves().call()
-    if (currentNetwork === 'oec' || currentNetwork === 'poly') return reserves[0] / reserves[1]
+    if (currentNetwork === 'oec' || currentNetwork === 'poly' || currentNetwork === 'aurora') return reserves[0] / reserves[1]
     return reserves[1] / reserves[0]
 }
 
 var getGasPrice = async () => {
+  if (currentNetwork !== 'aurora') {
     const reserves = await gasPair.methods.getReserves().call()
     if (currentNetwork === 'oec') return reserves[0] / reserves[1]
     return reserves[1] / reserves[0]
+  }
+  return 0
 }
 
 function populateNetwork() {
@@ -302,7 +338,7 @@ function updateNetwork(network) {
     conMarket = new web3.eth.Contract(NFTMarket, conAddress[currentNetwork].market)
     conTreasury = new web3.eth.Contract(Treasury, conAddress[currentNetwork].treasury)
     skillPair = new web3.eth.Contract(SwapPair, conAddress[currentNetwork].skillPair)
-    gasPair = new web3.eth.Contract(SwapPair, conAddress[currentNetwork].tokenPair)
+    gasPair = (currentNetwork !== 'aurora' ? new web3.eth.Contract(SwapPair, conAddress[currentNetwork].tokenPair): null)
     conMultiCall = new web3.eth.Contract(MultiCall, conAddress[currentNetwork].multicall)
     conPvp = new web3.eth.Contract(PvpArena, conAddress[currentNetwork].pvp)
     conRaid = new web3.eth.Contract(Raid, conAddress[currentNetwork].raid)

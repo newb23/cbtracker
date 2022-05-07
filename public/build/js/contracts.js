@@ -2263,6 +2263,32 @@ const CryptoBlades = [
   },
   {
     inputs: [],
+    name: "VAR_CHARACTER_FEE_INCREASE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "VAR_CHARACTER_MINT_TIMESTAMP",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "VAR_CLAIM_DEPOSIT_AMOUNT",
     outputs: [
       {
@@ -2393,6 +2419,58 @@ const CryptoBlades = [
   },
   {
     inputs: [],
+    name: "VAR_MINT_CHARACTER_FEE_DECREASE_SPEED",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "VAR_MINT_WEAPON_FEE_DECREASE_SPEED",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "VAR_MIN_CHARACTER_FEE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "VAR_MIN_WEAPON_FEE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "VAR_PARAM_DAILY_CLAIM_DEPOSIT_PERCENT",
     outputs: [
       {
@@ -2485,6 +2563,32 @@ const CryptoBlades = [
   {
     inputs: [],
     name: "VAR_UNCLAIMED_SKILL",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "VAR_WEAPON_FEE_INCREASE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "VAR_WEAPON_MINT_TIMESTAMP",
     outputs: [
       {
         internalType: "uint256",
@@ -3977,6 +4081,32 @@ const CryptoBlades = [
   {
     inputs: [],
     name: "getOwnRewardsClaimTax",
+    outputs: [
+      {
+        internalType: "int128",
+        name: "",
+        type: "int128",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getMintWeaponFee",
+    outputs: [
+      {
+        internalType: "int128",
+        name: "",
+        type: "int128",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getMintCharacterFee",
     outputs: [
       {
         internalType: "int128",
