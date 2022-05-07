@@ -124,8 +124,8 @@ var conAddress = {
 }
 
 var nodes = {
-    bnb: 'https://bsc-dataseed1.defibit.io/',
-    heco: 'https://http-mainnet.hecochain.com',
+    bnb: 'http://192.168.86.160/',
+    heco: 'http://192.168.86.65/',
     oec: 'https://exchainrpc.okex.org',
     poly: 'https://polygon-rpc.com/',
     avax: 'https://api.avax.network/ext/bc/C/rpc',
