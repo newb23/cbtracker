@@ -124,8 +124,8 @@ var conAddress = {
 }
 
 var nodes = {
-    bnb: 'http://192.168.86.160/',
-    heco: 'http://192.168.86.65/',
+    bnb: 'http://192.168.86.160:8545/',
+    heco: 'http://192.168.86.65:8545/',
     oec: 'https://exchainrpc.okex.org',
     poly: 'https://polygon-rpc.com/',
     avax: 'https://api.avax.network/ext/bc/C/rpc',
