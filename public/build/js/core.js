@@ -367,9 +367,9 @@ async function priceTicker() {
     $.get(`https://api.coingecko.com/api/v3/simple/price?ids=tether,near&vs_currencies=${currencies.join(',')}`, async (result) => {
         usdPrice = result.tether[currCurrency]
         if (currentNetwork === 'aurora') {
-          gasPrice = result['near'][currCurrency]
+          gasPrice = result.near[currCurrency]
           skillPrice /= 1000000
-          skillPrice *= result['near']['usd']
+          skillPrice *= result.near.usd
         }
         bnbPrice = gasPrice * usdPrice
         if (currentNetwork === 'bnb') {
@@ -756,7 +756,7 @@ function gasName(network) {
         case 'oec': return 'OKT'
         case 'poly': return 'MATIC'
         case 'avax': return 'AVAX'
-        case 'aurora': return 'NEAR'
+        case 'aurora': return 'AETH'
         default: return 'BNB'
     }
 }

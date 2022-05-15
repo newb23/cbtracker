@@ -37,4 +37,9 @@ gulp.task('diagnostic', () => gulp.src(['./public/js/diagnostic.js'])
   .pipe(minify())
   .pipe(gulp.dest('public/build/js')));
 
-gulp.task('default', gulp.series(['vendor', 'contracts', 'library', 'core', 'calculator', 'stats', 'diagnostic']));
+gulp.task('market', () => gulp.src(['./public/js/market.js'])
+  .pipe(concat('market.js'))
+  .pipe(minify())
+  .pipe(gulp.dest('public/build/js')));
+
+gulp.task('default', gulp.series(['vendor', 'contracts', 'library', 'core', 'calculator', 'stats', 'diagnostic', 'market']));

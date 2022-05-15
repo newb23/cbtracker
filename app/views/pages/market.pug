@@ -1,0 +1,28 @@
+main.page-wrapper
+  include ../includes/menu
+  section.position-relative.zindex-5.pb-4.mb-md-3.mx-5.pt-6
+    .row
+      include ../includes/alerts
+    .row.mx-n2.py-2
+      .col-md-12.col-sm-126.px-2.mb-3
+        .card.bg-dark
+          .card-header
+            .row.align-items-center
+              .col
+                h4.card-header-title.text-white
+                  | Market Sales Tracker
+              .col-auto
+                button.btn.btn-sm.btn-danger(type='button' data-bs-toggle='modal' data-bs-target='#modal-set-account')
+                  | Set Account
+          .card-body
+            .row
+              .col-md-12.mb-3
+                .p.text-white Result Format <code>Type,NFT ID,Price,Seller,Timestamp,Tx Hash</code>
+            .row
+              .col-md-3.mb-3
+                label.text-white.mb-1 Address subscribed
+                textarea#market-address.form-control(rows="15" readonly style='font-size: 13px; color: black;' wrap="off")
+              .col-md-9
+                label.text-white.mb-1 Market sales
+                textarea#market-result.form-control(rows="15" readonly style='font-size: 13px; color: black;' wrap="off")
+include ../footer
