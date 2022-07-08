@@ -2315,6 +2315,19 @@ const CryptoBlades = [
   },
   {
     inputs: [],
+    name: "VAR_FIGHT_FLAT_IGO_BONUS",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "VAR_HOURLY_DISTRIBUTION",
     outputs: [
       {
@@ -3375,7 +3388,18 @@ const CryptoBlades = [
       },
     ],
     name: "fight",
-    outputs: [],
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "function",
   },

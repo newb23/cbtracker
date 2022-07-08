@@ -9,6 +9,7 @@ var wssNodes = {
   poly: "wss://ws-matic-mainnet.chainstacklabs.com",
   avax: "wss://api.avax.network/ext/bc/C/ws",
   aurora: "wss://mainnet.aurora.dev",
+  skale: 'wss://mainnet.skalenodes.com/v1/ws/affectionate-immediate-pollux'
 };
 
 var marketAddress = $("#market-address");

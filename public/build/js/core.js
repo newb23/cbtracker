@@ -352,7 +352,7 @@ function renameAccount() {
 
 async function priceTicker() {
     skillPrice = await getSkillPrice()
-    if (currCurrency !== 'aurora') {
+    if (currentNetwork !== 'aurora' && currentNetwork !== 'skale') {
       gasPrice = await getGasPrice()
     }
 
@@ -364,7 +364,7 @@ async function priceTicker() {
         gasPrice *= 1000000000000
         skillPrice *= 1000000000000
     }
-    $.get(`https://api.coingecko.com/api/v3/simple/price?ids=tether,near&vs_currencies=${currencies.join(',')}`, async (result) => {
+    $.get(`https://api.coingecko.com/api/v3/simple/price?ids=tether,near,cryptoblades&vs_currencies=${currencies.join(',')}`, async (result) => {
         usdPrice = result.tether[currCurrency]
         if (currentNetwork === 'aurora') {
           gasPrice = result.near[currCurrency]
@@ -374,6 +374,11 @@ async function priceTicker() {
         bnbPrice = gasPrice * usdPrice
         if (currentNetwork === 'bnb') {
             skillPrice *= gasPrice
+        }
+        if (currentNetwork === 'skale') {
+          console.log(result.cryptoblades.usd)
+          skillPrice = result.cryptoblades.usd
+          gasPrice = 0;
         }
         localPrice = usdPrice * skillPrice
         $cardPrice.html(skillPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' }))
@@ -541,7 +546,7 @@ async function combatSimulate() {
         combatResult.html('Generating results...')
 
         var sta = await getCharacterStamina(charId)
-        if (sta < 40 * parseInt(stamina)) throw Error('Not enough stamina')
+        //if (sta < 40 * parseInt(stamina)) throw Error('Not enough stamina')
 
         var charData = characterFromContract(charId, await getCharacterData(charId))
         var weapData = weaponFromContract(weapId, await getWeaponData(weapId))
@@ -757,6 +762,7 @@ function gasName(network) {
         case 'poly': return 'MATIC'
         case 'avax': return 'AVAX'
         case 'aurora': return 'AETH'
+        case 'skale': return 'sFuel'
         default: return 'BNB'
     }
 }
