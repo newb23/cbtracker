@@ -5,14 +5,15 @@ var $table = $('#table-result tbody')
 
 async function testSimulate() {
     $('#btn-simulate').prop('disabled', true)
+    gtag('event', 'click', {'event_category' : 'button', 'event_label' : 'Calculate Rewards'})
     var charId = $('#combat-character').val()
     var weapId = $('#combat-weapon').val()
     $table.html('')
-    
+
     try {
         if (!charId) throw Error('Please enter a character.')
         if (!weapId) throw Error('Please enter a weapon.')
-        
+
         $table.html('<tr><td class="text-white text-center" colspan="13">Calculating....</span></tr>')
 
         var charData = characterFromContract(charId, await getCharacterData(charId))
@@ -23,7 +24,7 @@ async function testSimulate() {
 
         var results = await Promise.all(enemies.map(async (enemy) => {
             var alignedPower = getAlignedCharacterPower(charData, weapData)
-            var skill = fromEther((await getTokenReward(enemy.power)).toString().split('.')[0]);            
+            var skill = fromEther((await getTokenReward(enemy.power)).toString().split('.')[0]);
             var exp = Math.floor((enemy.power / alignedPower) * 32)
             return {
                 enemy,
@@ -41,14 +42,14 @@ async function testSimulate() {
             if (minSkill === 0) minSkill = skill
             if (skill > maxSkill) maxSkill = skill
             if (skill < minSkill) minSkill = skill
-            
+
             if (minExp === 0) minExp = exp
             if (exp > maxExp) maxExp = exp
             if (exp < minExp) minExp = exp
         })
 
         $table.html('')
-        var fights = parseInt(288 / 40)        
+        var fights = parseInt(288 / 40)
         for(var i = fights; i > 0; i--) {
             $table.append(` <tr>
                                 <td class="text-white">${i}</td>
@@ -75,6 +76,7 @@ async function testSimulate() {
 }
 
 $("#select-network").on('change', (e) => {
+    gtag('event', 'click', {'event_category' : 'button', 'event_label' : 'Update Network'})
     updateNetwork(e.currentTarget.value)
     populateNetwork()
 })

@@ -84,7 +84,7 @@ main.page-wrapper
           .card-body
             .row
               .col-md-12
-                button.btn.btn-sm.btn-light.mb-2.btn-refresh(type='button' onclick='refresh()' disabled)
+                button.btn.btn-sm.btn-light.mb-2.btn-refresh(type='button' onclick='btnRefresh()' disabled)
                   | Refresh
                 .form-check.form-switch(style='float: right; margin-right: 10px !important;')
                   input#btn-privacy.form-check-input(type="checkbox")
@@ -141,6 +141,6 @@ main.page-wrapper
                           | Total
                     tbody.text-center
               .col-md-12.mt-2
-                button.btn.btn-sm.btn-light.mb-2.btn-refresh(type='button' onclick='refresh()' disabled)
+                button.btn.btn-sm.btn-light.mb-2.btn-refresh(type='button' onclick='btnRefresh()' disabled)
                   | Refresh
 include ../footer

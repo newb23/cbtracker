@@ -23,6 +23,7 @@ function getAddress(chain, type) {
 
 async function runDiag() {
     $('#btn-diag').prop('disabled', true)
+    gtag('event', 'click', {'event_category' : 'button', 'event_label' : 'Diagnostic'})
     var chain = $('#diag-chain').val()
     var nftId = $('#diag-id').val()
     var nftType = $('#diag-type').val()

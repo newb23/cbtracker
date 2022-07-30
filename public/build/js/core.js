@@ -75,9 +75,9 @@ var $cardIngame = $('#card-ingame'),
     $convWeapFee = $('#conv-weap-fee')
 
 $('document').ready(async () => {
-    priceTicker()
-    setRewardsClaimTaxMax()
-    statTicker()
+    await priceTicker()
+    await setRewardsClaimTaxMax()
+    await statTicker()
     lastReset = parseInt(await getLastReset())
     resetTime = parseInt(lastReset)
     localStorage.setItem(`${currentNetwork}-reset`, resetTime)
@@ -85,20 +85,25 @@ $('document').ready(async () => {
     setInterval(() => {
         fiatConversion()
     }, 1000)
-    setInterval(() => {
-        priceTicker()
+    setInterval(async() => {
+        await priceTicker()
     }, 10000)
-    setInterval(() => {
-        statTicker()
+    setInterval(async () => {
+       await statTicker()
     }, 1000)
-    loadData()
+    await loadData()
 
 })
 
 async function refresh() {
-    loadData()
+    await loadData()
     clearFiat()
     fiatConversion()
+}
+
+async function btnRefresh() {
+    gtag('event', 'click', {'event_category' : 'button', 'event_label' : 'Refresh'})
+    await refresh()
 }
 
 function fiatConversion() {
@@ -327,7 +332,7 @@ function populateCurrency() {
     })
 }
 
-function addAccount() {
+async function addAccount() {
     var name = $('#inp-name').val().trim()
     var address = $('#inp-address').val().trim()
     if (storeAccounts.find(account => account === address)) return
@@ -337,7 +342,7 @@ function addAccount() {
         storeNames[address] = name
         if (storeAccounts) localStorage.setItem('accounts', JSON.stringify(storeAccounts))
         if (storeNames) localStorage.setItem('names', JSON.stringify(storeNames))
-        refresh()
+        await refresh()
     }
 }
 
@@ -867,6 +872,7 @@ $("#btn-hunstake").on('change', (e) => {
 })
 
 $("#select-currency").on('change', (e) => {
+    gtag('event', 'click', {'event_category' : 'button', 'event_label' : 'Update Currency'})
     currCurrency = e.currentTarget.value
     localStorage.setItem('currency', currCurrency)
     clearFiat()
@@ -876,13 +882,14 @@ $("#select-currency").on('change', (e) => {
 })
 
 $("#select-network").on('change', async (e) => {
+    gtag('event', 'click', {'event_category' : 'button', 'event_label' : 'Update Network'})
     updateNetwork(e.currentTarget.value)
     populateNetwork()
     updateBalanceLabel()
-    refresh()
     clearFiat()
-    priceTicker()
-    statTicker()
+    await refresh()
+    await priceTicker()
+    await statTicker()
 })
 
 $('#modal-add-account').on('shown.bs.modal', function (e) {

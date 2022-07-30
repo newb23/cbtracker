@@ -189,12 +189,12 @@ var getBNBBalance = address => web3.eth.getBalance(address);
 var fromEther = (value) => web3.utils.fromWei(BigInt(Math.trunc(value)).toString(), 'ether');
 var toEther = (value) => web3.utils.toWei(value.toFixed(18), 'ether');
 
-var getRewardsPoolBalance = () => conStakingReward.methods.balanceOf(mainAddress).call();
-var getStakingPoolBalance = () => conStakingToken.methods.balanceOf(stakingRewardAddress).call();
+var getRewardsPoolBalance = async () => conStakingReward.methods.balanceOf(mainAddress).call();
+var getStakingPoolBalance = async () => conStakingToken.methods.balanceOf(stakingRewardAddress).call();
 
-var getSkillWallet = address => conStakingToken.methods.balanceOf(address).call();
-var getStakedRewards = address => conStakingReward.methods.balanceOf(address).call();
-var getStakedTimeLeft = address => conStakingReward.methods.getStakeUnlockTimeLeft().call({ from: address });
+var getSkillWallet = async address => conStakingToken.methods.balanceOf(address).call();
+var getStakedRewards = async address => conStakingReward.methods.balanceOf(address).call();
+var getStakedTimeLeft = async address => conStakingReward.methods.getStakeUnlockTimeLeft().call({ from: address });
 var getAccountCharacters = async address => {
     var numberOfCharacters = parseInt(await conCharacters.methods.balanceOf(address).call(), 10)
     var characters = await Promise.all(
@@ -211,43 +211,43 @@ var getAccountWeapons = async address => {
     );
     return weapons;
 };
-var getAccountSkillReward = address => conCryptoBlades.methods.getTokenRewardsFor(address).call()
-var getOwnRewardsClaimTax = address => conCryptoBlades.methods.getOwnRewardsClaimTax().call({ from: address })
-var getRewardsClaimTaxMax = address => conCryptoBlades.methods.REWARDS_CLAIM_TAX_MAX().call({ from: address })
-var getIngameSkill = address => conCryptoBlades.methods.inGameOnlyFunds(address).call({ from: address })
-var getCharacterExp = charId => conCryptoBlades.methods.getXpRewards(`${charId}`).call()
-var characterTargets = (charId, weapId) => conCryptoBlades.methods.getTargets(charId, weapId).call()
-var getCharacterStamina = charId => conCharacters.methods.getStaminaPoints(`${charId}`).call()
-var getCharacterData = charId => conCharacters.methods.get(`${charId}`).call()
-var getWeaponData = weapId => conWeapons.methods.get(`${weapId}`).call()
-var getShieldData = shieldId => conShields.methods.get(`${shieldId}`).call()
-var fetchFightGasOffset = () => conCryptoBlades.methods.fightRewardGasOffset().call()
-var fetchFightBaseline = () => conCryptoBlades.methods.fightRewardBaseline().call()
-var usdToSkill = value => conCryptoBlades.methods.usdToSkill(value).call()
+var getAccountSkillReward = async address => conCryptoBlades.methods.getTokenRewardsFor(address).call()
+var getOwnRewardsClaimTax = async address => conCryptoBlades.methods.getOwnRewardsClaimTax().call({ from: address })
+var getRewardsClaimTaxMax = async address => conCryptoBlades.methods.REWARDS_CLAIM_TAX_MAX().call({ from: address })
+var getIngameSkill = async address => conCryptoBlades.methods.inGameOnlyFunds(address).call({ from: address })
+var getCharacterExp = async charId => conCryptoBlades.methods.getXpRewards(`${charId}`).call()
+var characterTargets = async (charId, weapId) => conCryptoBlades.methods.getTargets(charId, weapId).call()
+var getCharacterStamina = async charId => conCharacters.methods.getStaminaPoints(`${charId}`).call()
+var getCharacterData = async charId => conCharacters.methods.get(`${charId}`).call()
+var getWeaponData = async weapId => conWeapons.methods.get(`${weapId}`).call()
+var getShieldData = async shieldId => conShields.methods.get(`${shieldId}`).call()
+var fetchFightGasOffset = async () => conCryptoBlades.methods.fightRewardGasOffset().call()
+var fetchFightBaseline = async () => conCryptoBlades.methods.fightRewardBaseline().call()
+var usdToSkill = async value => conCryptoBlades.methods.usdToSkill(value).call()
 var decodeAbi = (types, data) => web3.eth.abi.decodeParameters(types, data)
-var getPastLogs = options => web3.eth.getPastLogs(options)
-var getLatestBlock = () =>  web3.eth.getBlock('latest')
-var getPastEvents = (event, fromBlock, toBlock, address) =>  conCryptoBlades.getPastEvents(event, {fromBlock, toBlock, filter: {owner: web3.utils.toChecksumAddress(address)}})
-var getTransaction = hash => web3.eth.getTransaction(hash)
-var getTransactionReceipt = hash => web3.eth.getTransactionReceipt(hash)
-var getFinalPrice = (contract, tokenId) => conMarket.methods.getFinalPrice(contract, tokenId).call()
-var getTokenGainForFight = (power, calculator) => conCryptoBlades.methods.getTokenGainForFight(power, calculator).call()
-var getCurrentAllowance = () => conCryptoBlades.methods.vars(13).call()
-var getHourlyAllowance = () => conCryptoBlades.methods.vars(18).call()
-var getHourlyPowerAvg = () => conCryptoBlades.methods.vars(4).call()
-var getPayPerFight = () => conCryptoBlades.methods.vars(5).call()
-var getMaxPayPerFight = () => conCryptoBlades.methods.vars(12).call()
-var getLastReset = () => conCryptoBlades.methods.vars(6).call()
-var getMaxClaim = () => conCryptoBlades.methods.vars(7).call()
-var getHourlyFights = () => conCryptoBlades.methods.vars(2).call()
-var getHourlyPowerSum = () => conCryptoBlades.methods.vars(3).call()
-var getTotalCharacters = () => conCharacters.methods.totalSupply().call()
-var getTotalWeapons = () => conWeapons.methods.totalSupply().call()
-var getTotalShields = () => conShields.methods.totalSupply().call()
-var getLastClaim = address => conCryptoBlades.methods.userVars(address, 10002).call()
-var getClaimable = address => conCryptoBlades.methods.getRemainingTokenClaimAmountPreTax().call({ from: address })
-var getSkillMultiplier = (id) => conTreasury.methods.getProjectMultiplier(id).call()
-var getActivePartnerProjectsIds = () => conTreasury.methods.getActivePartnerProjectsIds().call()
+var getPastLogs = async options => web3.eth.getPastLogs(options)
+var getLatestBlock = async () =>  web3.eth.getBlock('latest')
+var getPastEvents = async (event, fromBlock, toBlock, address) =>  conCryptoBlades.getPastEvents(event, {fromBlock, toBlock, filter: {owner: web3.utils.toChecksumAddress(address)}})
+var getTransaction = async hash => web3.eth.getTransaction(hash)
+var getTransactionReceipt = async hash => web3.eth.getTransactionReceipt(hash)
+var getFinalPrice = async (contract, tokenId) => conMarket.methods.getFinalPrice(contract, tokenId).call()
+var getTokenGainForFight = async (power, calculator) => conCryptoBlades.methods.getTokenGainForFight(power, calculator).call()
+var getCurrentAllowance = async () => conCryptoBlades.methods.vars(13).call()
+var getHourlyAllowance = async () => conCryptoBlades.methods.vars(18).call()
+var getHourlyPowerAvg = async () => conCryptoBlades.methods.vars(4).call()
+var getPayPerFight = async () => conCryptoBlades.methods.vars(5).call()
+var getMaxPayPerFight = async () => conCryptoBlades.methods.vars(12).call()
+var getLastReset = async () => conCryptoBlades.methods.vars(6).call()
+var getMaxClaim = async () => conCryptoBlades.methods.vars(7).call()
+var getHourlyFights = async () => conCryptoBlades.methods.vars(2).call()
+var getHourlyPowerSum = async () => conCryptoBlades.methods.vars(3).call()
+var getTotalCharacters = async () => conCharacters.methods.totalSupply().call()
+var getTotalWeapons = async () => conWeapons.methods.totalSupply().call()
+var getTotalShields = async () => conShields.methods.totalSupply().call()
+var getLastClaim = async address => conCryptoBlades.methods.userVars(address, 10002).call()
+var getClaimable = async address => conCryptoBlades.methods.getRemainingTokenClaimAmountPreTax().call({ from: address })
+var getSkillMultiplier = async (id) => conTreasury.methods.getProjectMultiplier(id).call()
+var getActivePartnerProjectsIds = async () => conTreasury.methods.getActivePartnerProjectsIds().call()
 
 var getSkillPartnerId = async () => {
     var activePartnerIds = await getActivePartnerProjectsIds()
