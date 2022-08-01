@@ -15,6 +15,10 @@ html#main(lang='en')
     link(rel='stylesheet' media='screen' href='/css/main.css')
     meta(name='coinzilla' content='d327568b4802f2f4e3795febda1adfdf')
 
+
+    script(src='https://coinzillatag.com/lib/sticky.js' id='coinzilla')
+    script(async='' src='https://coinzillatag.com/lib/display.js')
+
     // Google Analytics
     script(async='' src='https://www.googletagmanager.com/gtag/js?id=G-2C7J6DL9GR')
     script.
@@ -40,17 +44,17 @@ html#main(lang='en')
       script(type='text/javascript' src='/build/js/diagnostic-min.js')
     if page === 'market'
       script(type='text/javascript' src='/build/js/market-min.js')
-
-    script(src='https://coinzillatag.com/lib/sticky.js' id='coinzilla')
-    script(async='' src='https://coinzillatag.com/lib/display.js')
     script.
       window.coinzilla_sticky = window.coinzilla_sticky || [];function czilla(){coinzilla_sticky.push(arguments);}czilla('1426231acdf7b29b116');
 
-      var timer = setInterval(()=>{
-        try {
-          if (!coinzilla_id_session) {}
-        } catch(e) {
-          return alert('Please disable ad blocker to use this tool.')
-        }
-        return clearInterval(timer)
-      }, 1000)
+      $( document ).ready(function() {
+        var timer = setInterval(()=>{
+          try {
+            if (!coinzilla_id_session) {}
+          } catch(e) {
+            return alert('Please disable ad blocker to use this tool.')
+          }
+          return clearInterval(timer)
+        }, 1000)
+      });
+
