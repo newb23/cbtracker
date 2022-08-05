@@ -539,6 +539,7 @@ async function simulate(address) {
 
 async function combatSimulate() {
     $('#btn-simulate').prop('disabled', true)
+    gtag('event', 'click', {'event_category' : 'button', 'event_label' : 'Combat Simulate'})
     var charId = $('#combat-character').val()
     var weapId = $('#combat-weapon').val()
     var stamina = $('#combat-stamina').val()
