@@ -11,7 +11,7 @@ main.page-wrapper
               .col
                 h4.card-header-title.text-white
                   | Rewards Calculator
-          .card-body            
+          .card-body
             .row
               .col-md-3.col-sm-6.px-2.mb-3
                 .form-group.mb-3
@@ -25,50 +25,68 @@ main.page-wrapper
                       tr
                         th.text-white.align-middle.bg-wins(rowspan=3)
                           | Wins
-                        th.text-white.align-middle.bg-daily(colspan=4)
+                        th.text-white.align-middle.bg-daily(colspan=6)
                           | Daily
-                        th.text-white.align-middle.bg-weekly(colspan=4)
+                        th.text-white.align-middle.bg-weekly(colspan=6)
                           | Weekly
-                        th.text-white.align-middle.bg-monthly(colspan=4)
+                        th.text-white.align-middle.bg-monthly(colspan=6)
                           | Monthly
-                      tr 
+                      tr
                         th.text-white.align-middle.bg-daily(colspan=2)
                           | Skill
                         th.text-white.align-middle.bg-daily(colspan=2)
                           | Exp
+                        th.text-white.align-middle.bg-daily(colspan=2)
+                          | Gas Offset
                         th.text-white.align-middle.bg-weekly(colspan=2)
                           | Skill
                         th.text-white.align-middle.bg-weekly(colspan=2)
                           | Exp
+                        th.text-white.align-middle.bg-weekly(colspan=2)
+                          | Gas Offset
                         th.text-white.align-middle.bg-monthly(colspan=2)
                           | Skill
                         th.text-white.align-middle.bg-monthly(colspan=2)
                           | Exp
-                      tr 
+                        th.text-white.align-middle.bg-monthly(colspan=2)
+                          | Gas Offset
+                      tr
                         th.text-white.align-middle.bg-daily
-                          | Min 
+                          | Min
                         th.text-white.align-middle.bg-daily
-                          | Max 
+                          | Max
                         th.text-white.align-middle.bg-daily
-                          | Min 
+                          | Min
                         th.text-white.align-middle.bg-daily
-                          | Max 
+                          | Max
                         th.text-white.align-middle.bg-weekly
-                          | Min 
+                          | Min
                         th.text-white.align-middle.bg-weekly
-                          | Max 
+                          | Max
                         th.text-white.align-middle.bg-weekly
-                          | Min 
+                          | Min
                         th.text-white.align-middle.bg-weekly
-                          | Max 
+                          | Max
                         th.text-white.align-middle.bg-monthly
-                          | Min 
+                          | Min
                         th.text-white.align-middle.bg-monthly
-                          | Max 
+                          | Max
                         th.text-white.align-middle.bg-monthly
-                          | Min 
+                          | Min
                         th.text-white.align-middle.bg-monthly
-                          | Max 
+                          | Max
+                        th.text-white.align-middle.bg-weekly
+                          | Min
+                        th.text-white.align-middle.bg-weekly
+                          | Max
+                        th.text-white.align-middle.bg-weekly
+                          | Min
+                        th.text-white.align-middle.bg-weekly
+                          | Max
+                        th.text-white.align-middle.bg-weekly
+                          | Min
+                        th.text-white.align-middle.bg-weekly
+                          | Max
                     tbody.text-center
             button#btn-simulate.btn.btn-secondary(type='button' onclick='testSimulate()') Run
 include ../footer

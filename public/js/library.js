@@ -20,7 +20,8 @@ var conAddress = {
         quest: '0xD6CDf4072EB6bcF10ef1b715aaA0fDF755B52327',
         pvp: '0x8ADB6c9f7FAdB959a9847fd9Bd0ED503446942Ca',
         raid: '0x1067d34D7bEBe2BE81657e8a2E3CFEBb0161F96b',
-        garrison: '0x0D0Ebe222F8Fc996cC1BcF497d653082708b45E4'
+        garrison: '0x0D0Ebe222F8Fc996cC1BcF497d653082708b45E4',
+        tokenManager: '0xCE34a87173130eF691ff81feF1a6E8b8a9DAcA6F'
     },
     heco: {
         staking: '0x6109A500e5b9CE40FFe075Ea3A6beA6e93c23BcF',
@@ -41,7 +42,8 @@ var conAddress = {
         quest: '0xd3813bb74A8AB232e5CF61319b7b686CFd8788DA',
         pvp: '0x0cA50Cc9481FB3c5C0E8a02fAca97B25b0C73D5C',
         raid: '0x0aBb23EA06960608a4fa1529678C9abc208b4E8d',
-        garrison: '0x17afD75CBD5B51B4baE8D071ED9394f4Ef13ceCe'
+        garrison: '0x17afD75CBD5B51B4baE8D071ED9394f4Ef13ceCe',
+        tokenManager: '0x35bE6494A28648c084579A5C9787B2A1E5566377'
     },
     oec: {
         staking: '0xC5707a6a16CCe1963Ec3E6cdEE0A91e4876Be395',
@@ -62,7 +64,8 @@ var conAddress = {
         quest: '0x47a3c3e3925624beBf5193717d80EF494Bc9B8A7',
         pvp: '0x306d0D035b802a13cBfa389faFfb488ca1bbA874',
         raid: '0x29F8917c2E6e6bAcc9FD813354bCBEd8A8dD89E3',
-        garrison: '0xb1f45Dbd94013B379BEC270B9cE9da14A476b649'
+        garrison: '0xb1f45Dbd94013B379BEC270B9cE9da14A476b649',
+        tokenManager: '0x9259036aAa3dE32FD74D05058eaE139ccda1A48b'
     },
     poly: {
         staking: '0xE34e7cA8e64884E3b5Cd48991ba229d8302E85da',
@@ -83,7 +86,8 @@ var conAddress = {
         quest: '0xc97011880a37139BD5eEEAE7A2cf683a82D615e0',
         pvp: '0x1229Aad0b813fb5636834Eb82a7732A3f90a0149',
         raid: '0x6F104F58fFFC13b66A1BD45AA228167c4ADf746F',
-        garrison: '0x4D1559DF0B0724aC4bb095C713564211613683Ed'
+        garrison: '0x4D1559DF0B0724aC4bb095C713564211613683Ed',
+        tokenManager: '0xB8E65dd86e5BCEde186d0a11f1646B348EcB514B'
     },
     avax: {
         staking: '0x96438Debb1419bF0B53119Edae6e664c931504CA',
@@ -104,7 +108,8 @@ var conAddress = {
         quest: '',
         pvp: '0xC4Ca6D299ed56318FcB30344f47F5763aFB3c396',
         raid: '0xbAC6B71a5bC3517Bee588299980B3C357a518e5C',
-        garrison: '0xB861C1196BEb96856FD0733Bba108304b1B51806'
+        garrison: '0xB861C1196BEb96856FD0733Bba108304b1B51806',
+        tokenManager: '0xFc5a0c8a5adB7B2cD32f859fBd4AeaA362DaA151'
     },
     aurora: {
         staking: '0x5F6E97612482095C0c2C02BC495C0171e61017d7',
@@ -125,7 +130,8 @@ var conAddress = {
         quest: '0x89995f8C61d7366119773Ac791e9B427e1B63a4A',
         pvp: '0x0760d5F88b2ACA0aD387eb855Ac532090c208588',
         raid: '0x6CFDF6237C2A857f42Ff948b9117B0FA990bD42C',
-        garrison: '0x59dd354428B308055A19EdaA501b4df29970B58B'
+        garrison: '0x59dd354428B308055A19EdaA501b4df29970B58B',
+        tokenManager: '0xe1bAf442A842aa68D30b09513841B917AB2cAD28'
     },
     skale: {
         staking: '0x56aBf2ecdbb08ABc2654A212969569b5d2F907FF',
@@ -146,7 +152,8 @@ var conAddress = {
         quest: '0xE8f14F0a5a5f059ae060664e0f165B7e5A52e4e5',
         pvp: '0x2e4C28aa3Cb14923F492Eeb8cbc953fABfeE2923',
         raid: '0x0b140307200Ea06eE3E4737106202BE932f64218',
-        garrison: '0xdE2DDA740Db19e08E203c937310bBf2Ec3d1254C'
+        garrison: '0xdE2DDA740Db19e08E203c937310bBf2Ec3d1254C',
+        tokenManager: '0x7cf521Fa3CbFCe4524D04E700a9c182B364C268C'
     }
 }
 
@@ -157,7 +164,7 @@ var nodes = {
     poly: 'https://polygon-rpc.com/',
     avax: 'https://api.avax.network/ext/bc/C/rpc',
     aurora: 'https://mainnet.aurora.dev',
-    skale: 'https://mainnet.skalenodes.com/v1/affectionate-immediate-pollux'
+    skale: 'https://skale-proxy.cwsdev.net/'
 }
 
 var currentNetwork = localStorage.getItem('network')
@@ -183,6 +190,7 @@ var conMultiCall = new web3.eth.Contract(MultiCall, conAddress[currentNetwork].m
 var conPvp = new web3.eth.Contract(PvpArena, conAddress[currentNetwork].pvp)
 var conRaid = new web3.eth.Contract(Raid, conAddress[currentNetwork].raid)
 var conGarrison = new web3.eth.Contract(Garrison, conAddress[currentNetwork].garrison)
+var conTokenManager = new web3.eth.Contract(TokenManager, conAddress[currentNetwork].tokenManager)
 
 var isAddress = address => web3.utils.isAddress(address);
 var getBNBBalance = address => web3.eth.getBalance(address);
@@ -248,6 +256,10 @@ var getLastClaim = async address => conCryptoBlades.methods.userVars(address, 10
 var getClaimable = async address => conCryptoBlades.methods.getRemainingTokenClaimAmountPreTax().call({ from: address })
 var getSkillMultiplier = async (id) => conTreasury.methods.getProjectMultiplier(id).call()
 var getActivePartnerProjectsIds = async () => conTreasury.methods.getActivePartnerProjectsIds().call()
+var getSkillToNativeRatio = async () => conTokenManager.methods.getSkillToNativeRatio().call()
+var getTokenPrice = async () => conTokenManager.methods.tokenPrice().call()
+var getSkillTokenPrice = async () => conTokenManager.methods.skillTokenPrice().call()
+var getCombatTokenChargePercent = async () => conTokenManager.methods.combatTokenChargePercent().call()
 
 var getSkillPartnerId = async () => {
     var activePartnerIds = await getActivePartnerProjectsIds()
@@ -372,6 +384,7 @@ function updateNetwork(network) {
     conPvp = new web3.eth.Contract(PvpArena, conAddress[currentNetwork].pvp)
     conRaid = new web3.eth.Contract(Raid, conAddress[currentNetwork].raid)
     conGarrison = new web3.eth.Contract(Garrison, conAddress[currentNetwork].garrison)
+    conTokenManager = new web3.eth.Contract(TokenManager, conAddress[currentNetwork].tokenManager)
 }
 
 async function getTokenReward(power) {

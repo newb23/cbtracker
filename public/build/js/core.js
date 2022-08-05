@@ -561,14 +561,19 @@ async function combatSimulate() {
 
         var tokenRewards = await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenGainForFight', enemies.map(enemy => [enemy.power, false])))
 
-        combatResult.html('Enemy | Element | Power | Est. Reward | XP | Chance<br><hr>')
+        var tokenPrice = await getTokenPrice()
+        var skillTokenPrice = await getSkillTokenPrice()
+        var combatTokenChargePercent = await getCombatTokenChargePercent()
+
+        combatResult.html('Enemy | Element | Power | Est. Reward | Gas Offset | XP | Chance<br><hr>')
         combatResult.append(enemies.map((enemy, i) => {
             var chance = getWinChance(charData, weapData, enemy.power, enemy.trait)
             enemy.element = traitNumberToName(enemy.trait)
             var reward = fromEther(tokenRewards[i] * parseInt(stamina));
             var alignedPower = getAlignedCharacterPower(charData, weapData)
             var expReward = Math.floor((enemy.power / alignedPower) * 32) * parseInt(stamina)
-            return `#${i + 1} | ${elemToColor(enemy.element)} | ${enemy.power} | ${truncateToDecimals(reward, 6)} | ${expReward} | ${chanceColor(chance)}<br>`
+            var gasOffset = fromEther(Math.trunc((tokenRewards[i] * (combatTokenChargePercent) / 100 * skillTokenPrice) / tokenPrice))
+            return `#${i + 1} | ${elemToColor(enemy.element)} | ${enemy.power} | ${truncateToDecimals(reward, 6)} | ${truncateToDecimals(gasOffset, 6)} | ${expReward} | ${chanceColor(chance)}<br>`
         }))
         $('#btn-simulate').removeAttr('disabled')
     } catch (e) {
