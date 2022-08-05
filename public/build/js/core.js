@@ -179,7 +179,7 @@ async function loadData() {
     var accUnclaimed = await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenRewardsFor', storeAccounts.map(acc => [acc])))
     var skillPartnerId = await getSkillPartnerId()
     var skillMultiplier = skillPartnerId ? Number(fromEther(await getSkillMultiplier(skillPartnerId))) : 0
-    var first = true;
+    var first = false;
 
     var fRowHtml = await Promise.all(storeAccounts.map(async (address, i) => {
         let rowHtml = ''

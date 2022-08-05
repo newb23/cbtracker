@@ -164,7 +164,7 @@ var nodes = {
     poly: 'https://polygon-rpc.com/',
     avax: 'https://api.avax.network/ext/bc/C/rpc',
     aurora: 'https://mainnet.aurora.dev',
-    skale: 'https://skale-proxy.cwsdev.net/'
+    skale: 'https://mainnet.skalenodes.com/v1/affectionate-immediate-pollux'
 }
 
 var currentNetwork = localStorage.getItem('network')
