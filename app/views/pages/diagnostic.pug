@@ -13,7 +13,7 @@ main.page-wrapper
                   | Diagnostic
           .card-body
             .row
-              .col-md-3.col-sm-6.px-2.mb-3
+              .col-lg-3.col-md-3.col-sm-6.px-2.mb-3.text-center
                 .form-group.mb-3
                   select#diag-chain.form-control.form-control.bg-dark.text-white
                     option(value='' readonly) -- Select Chain --
@@ -32,9 +32,7 @@ main.page-wrapper
                     option(value='character') Character
                     option(value='weapon') Weapon
                     option(value='shield') Shield
-              .col-md-7.col-sm-6.px-2.mb-3
-                p#diag-result.text-white
-              .col-md-2.col-sm-6.px-2.mb-3
+              .col-lg-2.col-md-2.col-sm-6.px-2.mb-3.text-center
                 .coinzilla(data-zone='C-8496231acdf7913993')
                   script.
                       window.coinzilla_display = window.coinzilla_display || [];
@@ -43,5 +41,7 @@ main.page-wrapper
                       c_display_preferences.width = "300";
                       c_display_preferences.height = "250";
                       coinzilla_display.push(c_display_preferences);
+              .col-lg-7.col-md-7.col-sm-12.px-2.mb-3.text-center
+                p#diag-result.text-white
             button#btn-diag.btn.btn-secondary(type='button' onclick='runDiag()') Run
 include ../footer

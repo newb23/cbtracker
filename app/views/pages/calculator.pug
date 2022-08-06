@@ -13,12 +13,21 @@ main.page-wrapper
                   | Rewards Calculator
           .card-body
             .row
-              .col-md-3.col-sm-6.px-2.mb-3
+              .col-lg-3.col-md-3.col-sm-6.px-2.mb-3.text-center
                 .form-group.mb-3
                   input#combat-character.form-control.form-control.bg-dark.text-white(placeholder='Character ID')
                 .form-group.mb-3
                   input#combat-weapon.form-control.form-control.bg-dark.text-white(placeholder='Weapon ID')
-              .col-md-9.col-sm-6.px-2.mb-3
+              .col-lg-2.col-md-2.col-sm-6.px-2.mb-3.text-center
+                .coinzilla(data-zone='C-8496231acdf7913993')
+                  script.
+                      window.coinzilla_display = window.coinzilla_display || [];
+                      var c_display_preferences = {};
+                      c_display_preferences.zone = "8496231acdf7913993";
+                      c_display_preferences.width = "300";
+                      c_display_preferences.height = "250";
+                      coinzilla_display.push(c_display_preferences);
+              .col-lg-7.col-md-7.col-sm-12.px-2.mb-3.text-center
                 .table-responsive.mb-0
                   table#table-result.table.table-sm.card-table.table-bordered
                     thead.text-center
