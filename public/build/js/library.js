@@ -239,7 +239,7 @@ var getPastEvents = async (event, fromBlock, toBlock, address) =>  conCryptoBlad
 var getTransaction = async hash => web3.eth.getTransaction(hash)
 var getTransactionReceipt = async hash => web3.eth.getTransactionReceipt(hash)
 var getFinalPrice = async (contract, tokenId) => conMarket.methods.getFinalPrice(contract, tokenId).call()
-var getTokenGainForFight = async (power, calculator) => conCryptoBlades.methods.getTokenGainForFight(power, calculator).call()
+var getTokenGainForFight = async (power) => conCryptoBlades.methods.getTokenGainForFight(power).call()
 var getCurrentAllowance = async () => conCryptoBlades.methods.vars(13).call()
 var getHourlyAllowance = async () => conCryptoBlades.methods.vars(18).call()
 var getHourlyPowerAvg = async () => conCryptoBlades.methods.vars(4).call()
@@ -388,7 +388,7 @@ function updateNetwork(network) {
 }
 
 async function getTokenReward(power) {
-    return getTokenGainForFight(power, false)
+    return getTokenGainForFight(power)
 }
 
 populateNetwork()

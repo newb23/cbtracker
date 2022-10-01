@@ -64,20 +64,20 @@ async function testSimulate() {
                                 <td class="text-success">${parseFloat(maxSkill * i).toFixed(6)}</td>
                                 <td class="text-warning">${parseInt(minExp * i)}</td>
                                 <td class="text-warning">${parseInt(maxExp * i)}</td>
-                                <td class="text-info">${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i).toFixed(6)}</td>
-                                <td class="text-info">${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i).toFixed(6)}</td>
+                                <td class="text-info" title="$${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * (tokenPrice / 10)).toFixed(4)}">${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i).toFixed(6)}</td>
+                                <td class="text-info" title="$${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * (tokenPrice / 10)).toFixed(4)}">${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i).toFixed(6)}</td>
                                 <td class="text-success">${parseFloat(minSkill * i * week).toFixed(6)}</td>
                                 <td class="text-success">${parseFloat(maxSkill * i * week).toFixed(6)}</td>
                                 <td class="text-warning">${parseInt(minExp * i * week)}</td>
                                 <td class="text-warning">${parseInt(maxExp * i * week)}</td>
-                                <td class="text-info">${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * week).toFixed(6)}</td>
-                                <td class="text-info">${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * week).toFixed(6)}</td>
+                                <td class="text-info" title="$${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * week * (tokenPrice / 10)).toFixed(4)}">${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * week).toFixed(6)}</td>
+                                <td class="text-info" title="$${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * week * (tokenPrice / 10)).toFixed(4)}">${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * week).toFixed(6)}</td>
                                 <td class="text-success">${parseFloat(minSkill * i * month).toFixed(6)}</td>
                                 <td class="text-success">${parseFloat(maxSkill * i * month).toFixed(6)}</td>
                                 <td class="text-warning">${parseInt(minExp * i * month)}</td>
                                 <td class="text-warning">${parseInt(maxExp * i * month)}</td>
-                                <td class="text-info">${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * month).toFixed(6)}</td>
-                                <td class="text-info">${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * month).toFixed(6)}</td>
+                                <td class="text-info" title="$${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * month * (tokenPrice / 10)).toFixed(4)}">${parseFloat(getGasOffsetFee(minSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * month).toFixed(6)}</td>
+                                <td class="text-info" title="$${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * month * (tokenPrice / 10)).toFixed(4)}">${parseFloat(getGasOffsetFee(maxSkill, tokenPrice, skillTokenPrice, combatTokenChargePercent) * i * month).toFixed(6)}</td>
                             </tr>`)
         }
         $('#btn-simulate').removeAttr('disabled')

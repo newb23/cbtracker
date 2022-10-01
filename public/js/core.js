@@ -552,6 +552,7 @@ async function combatSimulate() {
         combatResult.html('Generating results...')
 
         var sta = await getCharacterStamina(charId)
+        console.log(sta)
         //if (sta < 40 * parseInt(stamina)) throw Error('Not enough stamina')
 
         var charData = characterFromContract(charId, await getCharacterData(charId))
@@ -560,7 +561,7 @@ async function combatSimulate() {
         var targets = await characterTargets(charId, weapId)
         var enemies = await getEnemyDetails(targets)
 
-        var tokenRewards = await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenGainForFight', enemies.map(enemy => [enemy.power, false])))
+        var tokenRewards = await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenGainForFight', enemies.map(enemy => [enemy.power])))
 
         var tokenPrice = await getTokenPrice()
         var skillTokenPrice = await getSkillTokenPrice()
@@ -578,7 +579,7 @@ async function combatSimulate() {
         }))
         $('#btn-simulate').removeAttr('disabled')
     } catch (e) {
-        combatResult.html(e.message)
+        combatResult.html(e)
         $('#btn-simulate').removeAttr('disabled')
     }
 }
