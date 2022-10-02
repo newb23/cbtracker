@@ -573,7 +573,7 @@ async function combatSimulate() {
     var targets = await characterTargets(charId, weapId)
     var enemies = await getEnemyDetails(targets)
 
-    var tokenRewards = await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenGainForFight', enemies.map(enemy => [enemy.power, false])))
+    var tokenRewards = await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenGainForFight', enemies.map(enemy => [enemy.power])))
 
     var tokenPrice = await getTokenPrice()
     var skillTokenPrice = await getSkillTokenPrice()
