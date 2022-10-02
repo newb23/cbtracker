@@ -389,6 +389,7 @@ function updateNetwork(network) {
     web3 = new Web3(nodes[currentNetwork]);
     conStakingReward = new web3.eth.Contract(IStakingRewards, conAddress[currentNetwork].staking)
     conSkillToken = new web3.eth.Contract(IERC20, conAddress[currentNetwork].token)
+    conValorToken = new web3.eth.Contract(IERC20, conAddress[currentNetwork].valor)
     conCryptoBlades = new web3.eth.Contract(CryptoBlades, conAddress[currentNetwork].cryptoBlades)
     conCharacters = new web3.eth.Contract(Characters, conAddress[currentNetwork].character)
     conWeapons = new web3.eth.Contract(Weapons, conAddress[currentNetwork].weapon)
