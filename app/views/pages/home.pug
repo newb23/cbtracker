@@ -6,22 +6,22 @@ main.page-wrapper
     .row.mx-n2.py-2
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Total Claimable Skills
+          h6#card-claimable-title.fs-sm.fw-medium.text-muted Total Claimable Skills
           span#card-ingame.h4.text-white 0
           span#conv-ingame.mb-2.text-white.card-label
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Total Unclaimed Skills
+          h6#card-unclaimed-title.fs-sm.fw-medium.text-muted Total Unclaimed Skills
           span#card-unclaim.h4.text-white 0
           span#conv-unclaim.mb-2.text-white.card-label
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Total Staked Skills
+          h6#card-staked-title.fs-sm.fw-medium.text-muted Total Staked Skills
           span#card-stake.h4.text-white 0
           span#conv-stake.mb-2.text-white.card-label
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Total Skills in Wallet
+          h6#card-wallet-title.fs-sm.fw-medium.text-muted Total Skills in Wallet
           span#card-wallet.h4.text-white 0
           span#conv-wallet.mb-2.text-white.card-label
       .col-md-2.col-sm-6.px-2.mb-3
@@ -49,12 +49,12 @@ main.page-wrapper
           span#card-souls.h4.text-white
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Current Skill Price
+          h6#card-price-title.fs-sm.fw-medium.text-muted Current Skill Price
           span#card-price.h4.text-white 0
           span#conv-price.mb-2.text-white.card-label
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
-          h6.fs-sm.fw-medium.text-muted Skill Multiplier
+          h6#card-multiplier-title.fs-sm.fw-medium.text-muted Skill Multiplier
           span#card-claim.h4.text-white 0
       .col-md-2.col-sm-6.px-2.mb-3
         .card.h-100.rounded-3.p-4.text-center.text-white.bg-dark
@@ -91,10 +91,13 @@ main.page-wrapper
                   label.form-check-label.text-white(for="btn-privacy") Hide address
                 .form-check.form-switch(style='float: right; margin-right: 10px !important;')
                   input#btn-hskills.form-check-input(type="checkbox")
-                  label.form-check-label.text-white(for="btn-privacy") Hide skill assets
+                  label#btn-hskill-label.form-check-label.text-white(for="btn-privacy") Hide skill assets
                 .form-check.form-switch(style='float: right; margin-right: 10px !important;')
                   input#btn-hchars.form-check-input(type="checkbox")
                   label.form-check-label.text-white(for="btn-privacy") Hide characters
+                .form-check.form-switch(style='float: right; margin-right: 10px !important;')
+                  input#btn-gen2.form-check-input(type="checkbox")
+                  label.form-check-label.text-white(for="btn-gen2") Gen 2
               .col-md-12
                 .table-responsive.mb-0
                   table#table-accounts.table.table-sm.card-table.table-bordered
@@ -106,7 +109,7 @@ main.page-wrapper
                           | Address
                         th.text-white.char-column(colspan='8')
                           | Characters
-                        th.text-white.skill-column(colspan='5')
+                        th#label-asset.text-white.skill-column(colspan='5')
                           | Skill Assets
                         th#label-balance.text-white.align-middle(rowspan='2')
                           | BNB Balance
