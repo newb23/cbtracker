@@ -744,7 +744,7 @@ function gen2Helper(toggle) {
     $('#card-wallet-title').html('Total Skills in Wallet')
     $('#card-total-title').html('Total Skill Assets')
     $('#card-price-title').html('Current Skill Price')
-    $('#card-multiplier-title').html('Valor Multiplier')
+    $('#card-multiplier-title').html('Skill Multiplier')
   }
 }
 
