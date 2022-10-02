@@ -183,7 +183,7 @@ async function loadData() {
     var accSkillStaked180 = await multicall(getNFTCall(SkillStaking180, conAddress[currentNetwork].skillStaking180, 'balanceOf', storeAccounts.map(acc => [acc])))
   }
 
-  var accUnclaimed = isGen2 ? await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'userVars', storeAccounts.map(acc => [acc, 10011])))
+  var accUnclaimed = isGen2 && currentNetwork === 'bnb' ? await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'userVars', storeAccounts.map(acc => [acc, 10011])))
     : await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenRewardsFor', storeAccounts.map(acc => [acc])))
   var skillPartnerId = isGen2 ? await getValorPartnerId() : await getSkillPartnerId()
   var skillMultiplier = skillPartnerId ? Number(fromEther(await getProjectMultiplier(skillPartnerId))) : 0
@@ -193,7 +193,7 @@ async function loadData() {
     let rowHtml = ''
     var charIds = await getAccountCharacters(address)
     var binance = await getBNBBalance(address)
-    var wallet = isGen2 ? await getValorWallet(address) : await getSkillWallet(address)
+    var wallet = isGen2 && currentNetwork === 'bnb' ? await getValorWallet(address) : await getSkillWallet(address)
     var staked = (currentNetwork === 'bnb' ? (web3.utils.toBN(sumOfStakedSkill(accSkillStaked30[i], accSkillStaked90[i], accSkillStaked180[i]))) : await getStakedRewards(address))
     var unclaimed = accUnclaimed[i]
     var claimable = unclaimed * skillMultiplier
@@ -406,7 +406,7 @@ async function priceTicker() {
 async function statTicker() {
   const charFee = await getCharacterMintFee()
   const weapFee = await getWeaponMintFee()
-  const skillPartnerId = isGen2 ? await getValorPartnerId() : await getSkillPartnerId()
+  const skillPartnerId = isGen2 && currentNetwork === 'bnb' ? await getValorPartnerId() : await getSkillPartnerId()
   const maxClaim = skillPartnerId ? await getProjectMultiplier(skillPartnerId) : 0
 
   $cardCharFee.html(Number(charFee).toLocaleString('en-US'))
