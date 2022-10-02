@@ -185,7 +185,7 @@ async function loadData() {
 
   var accUnclaimed = isGen2 && currentNetwork === 'bnb' ? await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'userVars', storeAccounts.map(acc => [acc, 10011])))
     : await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenRewardsFor', storeAccounts.map(acc => [acc])))
-  var skillPartnerId = isGen2 ? await getValorPartnerId() : await getSkillPartnerId()
+  var skillPartnerId = isGen2 && currentNetwork === 'bnb' ? await getValorPartnerId() : await getSkillPartnerId()
   var skillMultiplier = skillPartnerId ? Number(fromEther(await getProjectMultiplier(skillPartnerId))) : 0
   var first = false;
 
@@ -394,7 +394,6 @@ async function priceTicker() {
       }
     }
     if (currentNetwork === 'skale') {
-      console.log(result.cryptoblades.usd)
       skillPrice = result.cryptoblades.usd
       gasPrice = 0;
     }
@@ -726,7 +725,7 @@ function unstakeHelper(hide) {
 }
 
 function gen2Helper(toggle) {
-  if (toggle) {
+  if (toggle && currentNetwork === 'bnb') {
     $('#label-asset').html('Avalor Assets')
     $('#btn-hskill-label').html('Hide valor assets')
     $('#card-claimable-title').html('Total Claimable Valors')
