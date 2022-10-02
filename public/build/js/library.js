@@ -185,7 +185,7 @@ var web3 = new Web3(nodes[currentNetwork]);
 
 var conStakingReward = new web3.eth.Contract(IStakingRewards, conAddress[currentNetwork].staking);
 var conSkillToken = new web3.eth.Contract(IERC20, conAddress[currentNetwork].token);
-var conValorToken = new web3.eth.Contract(IERC20, conAddress[currentNetwork].valor);
+var conValorToken = currentNetwork === 'bnb' ? new web3.eth.Contract(IERC20, conAddress[currentNetwork].valor) : null;
 var conCryptoBlades = new web3.eth.Contract(CryptoBlades, conAddress[currentNetwork].cryptoBlades);
 var conCharacters = new web3.eth.Contract(Characters, conAddress[currentNetwork].character);
 var conWeapons = new web3.eth.Contract(Weapons, conAddress[currentNetwork].weapon);
@@ -389,7 +389,7 @@ function updateNetwork(network) {
     web3 = new Web3(nodes[currentNetwork]);
     conStakingReward = new web3.eth.Contract(IStakingRewards, conAddress[currentNetwork].staking)
     conSkillToken = new web3.eth.Contract(IERC20, conAddress[currentNetwork].token)
-    conValorToken = new web3.eth.Contract(IERC20, conAddress[currentNetwork].valor)
+    conValorToken = currentNetwork === 'bnb' ? new web3.eth.Contract(IERC20, conAddress[currentNetwork].valor) : null
     conCryptoBlades = new web3.eth.Contract(CryptoBlades, conAddress[currentNetwork].cryptoBlades)
     conCharacters = new web3.eth.Contract(Characters, conAddress[currentNetwork].character)
     conWeapons = new web3.eth.Contract(Weapons, conAddress[currentNetwork].weapon)
