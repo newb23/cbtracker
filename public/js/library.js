@@ -1,4 +1,4 @@
-var networks = ['bnb', 'heco', 'oec', 'poly', 'avax', 'aurora', 'skale']
+var networks = ['bnb', 'heco', 'oec', 'poly', 'avax', 'aurora', 'skale', 'coinex']
 
 var conAddress = {
     bnb: {
@@ -161,6 +161,29 @@ var conAddress = {
         garrison: '0xdE2DDA740Db19e08E203c937310bBf2Ec3d1254C',
         tokenManager: '0x7cf521Fa3CbFCe4524D04E700a9c182B364C268C',
         valor: ''
+    },
+    coinex: {
+        staking: '0x45e873b4cFfd843eDDa61a6140a57D05b11b71F4',
+        token: '0xC28a73FCb6248Cb1718A50a9EC9cBC361dee3ea1',
+        cryptoBlades: '0x912252d3f7DaD807d122F7DBAd3D8245fc364C3d',
+        character: '0x863D6074aFaF02D9D41A5f8Ea83278DF7089aA86',
+        weapon: '0xE34e7cA8e64884E3b5Cd48991ba229d8302E85da',
+        shield: '',
+        junk: '',
+        market: '0x90A20d4059a6Fd1C43B296b8D5F3752d0F9a98DD',
+        skillPair: '',
+        tokenPair: '',
+        treasury: '0xC938a77fe5B6E4291464A80C7DB74cc4dC3909c9',
+        multicall: '0xCaF3F0e962CF51ee8bb226630B0a47451d81c16D',
+        skillStaking30: '',
+        skillStaking90: '',
+        skillStaking180: '',
+        quest: '0xc8102b2111D7D7A927d640384B46FA9CA1E6C946',
+        pvp: '0xE257975E4ea9cbD6a53076861686A34Cb53Be406',
+        raid: '0xbbCA928DddEDE7615f45823Cf30c7F05063ef1Cb',
+        garrison: '0xdE2DDA740Db19e08E203c937310bBf2Ec3d1254C',
+        tokenManager: '0x7cf521Fa3CbFCe4524D04E700a9c182B364C268C',
+        valor: ''
     }
 }
 
@@ -171,7 +194,8 @@ var nodes = {
     poly: 'https://polygon-rpc.com/',
     avax: 'https://api.avax.network/ext/bc/C/rpc',
     aurora: 'https://mainnet.aurora.dev',
-    skale: 'https://mainnet.skalenodes.com/v1/affectionate-immediate-pollux'
+    skale: 'https://mainnet.skalenodes.com/v1/affectionate-immediate-pollux',
+    coinex: 'https://rpc.coinex.net'
 }
 
 var currentNetwork = localStorage.getItem('network')
@@ -192,7 +216,7 @@ var conWeapons = new web3.eth.Contract(Weapons, conAddress[currentNetwork].weapo
 var conShields = new web3.eth.Contract(Shields, conAddress[currentNetwork].shield);
 var conMarket = new web3.eth.Contract(NFTMarket, conAddress[currentNetwork].market);
 var conTreasury = new web3.eth.Contract(Treasury, conAddress[currentNetwork].treasury)
-var skillPair = new web3.eth.Contract(SwapPair, conAddress[currentNetwork].skillPair)
+var skillPair = (currentNetwork !== 'coinex' && currentNetwork !== 'skale' ? new web3.eth.Contract(SwapPair, conAddress[currentNetwork].skillPair) : null)
 var gasPair = (currentNetwork !== 'aurora' && currentNetwork !== 'skale' ? new web3.eth.Contract(SwapPair, conAddress[currentNetwork].tokenPair): null)
 var conMultiCall = new web3.eth.Contract(MultiCall, conAddress[currentNetwork].multicall)
 var conPvp = new web3.eth.Contract(PvpArena, conAddress[currentNetwork].pvp)
@@ -269,6 +293,7 @@ var getSkillToNativeRatio = async () => conTokenManager.methods.getSkillToNative
 var getTokenPrice = async () => conTokenManager.methods.tokenPrice().call()
 var getSkillTokenPrice = async () => conTokenManager.methods.skillTokenPrice().call()
 var getCombatTokenChargePercent = async () => conTokenManager.methods.combatTokenChargePercent().call()
+var getSkillToPartnerRatio = async (id) => conTreasury.methods.getSkillToPartnerRatio(id).call()
 
 var getSkillPartnerId = async () => {
     var activePartnerIds = await getActivePartnerProjectsIds()
@@ -358,7 +383,7 @@ var getNFTCall = (abi, address, name, params) => ({
 })
 
 var getSkillPrice = async () => {
-    if (currentNetwork === 'skale') return 0;
+    if (currentNetwork === 'skale' || currentNetwork === 'coinex') return 0;
     const reserves = await skillPair.methods.getReserves().call()
     if (currentNetwork === 'oec' || currentNetwork === 'poly' || currentNetwork === 'aurora') return reserves[0] / reserves[1]
     return reserves[1] / reserves[0]
@@ -371,6 +396,10 @@ var getGasPrice = async () => {
     return reserves[1] / reserves[0]
   }
   return 0
+}
+
+var getRatio = (ratio) => {
+  return 1 / (ratio / (2**64));
 }
 
 function populateNetwork() {

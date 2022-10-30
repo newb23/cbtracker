@@ -187,6 +187,7 @@ async function loadData() {
     : await multicall(getNFTCall(CryptoBlades, conAddress[currentNetwork].cryptoBlades, 'getTokenRewardsFor', storeAccounts.map(acc => [acc])))
   var skillPartnerId = isGen2 && currentNetwork === 'bnb' ? await getValorPartnerId() : await getSkillPartnerId()
   var skillMultiplier = skillPartnerId ? Number(fromEther(await getProjectMultiplier(skillPartnerId))) : 0
+  var skillRatio = skillPartnerId ? await getSkillToPartnerRatio(skillPartnerId) : 0;
   var first = false;
 
   var fRowHtml = await Promise.all(storeAccounts.map(async (address, i) => {
@@ -196,7 +197,7 @@ async function loadData() {
     var wallet = isGen2 && currentNetwork === 'bnb' ? await getValorWallet(address) : await getSkillWallet(address)
     var staked = (currentNetwork === 'bnb' ? (web3.utils.toBN(sumOfStakedSkill(accSkillStaked30[i], accSkillStaked90[i], accSkillStaked180[i]))) : await getStakedRewards(address))
     var unclaimed = accUnclaimed[i]
-    var claimable = unclaimed * skillMultiplier
+    var claimable = unclaimed / getRatio(skillRatio) * skillMultiplier
 
     var charCount = parseInt($cardChar.html())
     charCount += charIds.length
@@ -366,7 +367,7 @@ function renameAccount() {
 
 async function priceTicker() {
   skillPrice = await getSkillPrice()
-  if (currentNetwork !== 'aurora' && currentNetwork !== 'skale') {
+  if (currentNetwork !== 'aurora' && currentNetwork !== 'skale' && currentNetwork !== 'coinex') {
     gasPrice = await getGasPrice()
   }
 
@@ -378,7 +379,7 @@ async function priceTicker() {
     gasPrice *= 1000000000000
     skillPrice *= 1000000000000
   }
-  $.get(`https://api.coingecko.com/api/v3/simple/price?ids=tether,near,cryptoblades&vs_currencies=${currencies.join(',')}`, async (result) => {
+  $.get(`https://api.coingecko.com/api/v3/simple/price?ids=tether,near,cryptoblades,coinex-token&vs_currencies=${currencies.join(',')}`, async (result) => {
     usdPrice = result.tether[currCurrency]
     if (currentNetwork === 'aurora') {
       gasPrice = result.near[currCurrency]
@@ -393,9 +394,13 @@ async function priceTicker() {
         skillPrice *= gasPrice
       }
     }
-    if (currentNetwork === 'skale') {
+    if (currentNetwork === 'skale' || currentNetwork === 'coinex') {
       skillPrice = result.cryptoblades.usd
-      gasPrice = 0;
+      if (currentNetwork === 'skale') {
+        gasPrice = 0;
+      } else {
+        gasPrice = result['coinex-token'].usd;
+      }
     }
     localPrice = usdPrice * skillPrice
     $cardPrice.html(skillPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' }))
@@ -811,6 +816,7 @@ function gasName(network) {
     case 'avax': return 'AVAX'
     case 'aurora': return 'AETH'
     case 'skale': return 'sFuel'
+    case 'coinex': return 'CET'
     default: return 'BNB'
   }
 }
