@@ -1,0 +1,1 @@
+var cointrafficAds = true;

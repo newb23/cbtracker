@@ -42,4 +42,9 @@ gulp.task('market', () => gulp.src(['./public/js/market.js'])
   .pipe(minify())
   .pipe(gulp.dest('public/build/js')));
 
-gulp.task('default', gulp.series(['vendor', 'contracts', 'library', 'core', 'calculator', 'stats', 'diagnostic', 'market']));
+gulp.task('ads', () => gulp.src(['./public/js/prebid-ads.js'])
+  .pipe(concat('prebid-ads.js'))
+  .pipe(minify())
+  .pipe(gulp.dest('public/build/js')));
+
+gulp.task('default', gulp.series(['vendor', 'contracts', 'library', 'core', 'calculator', 'stats', 'diagnostic', 'market', 'ads']));
