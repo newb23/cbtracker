@@ -257,10 +257,10 @@ async function loadData() {
                         <td class="char-column">${chars[0].nextLevel}<br/><span style='font-size: 10px'>${(chars[0].mustClaim ? '<span class="text-gold">(Claim now)</span>' : `<span data-xp="${chars[0].charId}">(${Number(chars[0].nextExp).toLocaleString('en-US')}</span> xp left)`)}</span></td>
                         <td class="char-column" data-sta="${chars[0].charId}">${staminaToColor(chars[0].sta)}<br/>${staminaFullAt(chars[0].sta)}</td>`
     } else {
-      //if (first) {
+      if (first) {
         charHtml = `<td class="char-column" colspan="8">
-                      <span id="ct_cH8icOIcl5J"></span>
-                            <!--<div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
+                      <!--<span id="ct_cH8icOIcl5J"></span>-->
+                            <div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
                             <script>
                                 window.coinzilla_display = window.coinzilla_display || [];
                                 var c_display_preferences = {};
@@ -268,12 +268,12 @@ async function loadData() {
                                 c_display_preferences.width = "728";
                                 c_display_preferences.height = "90";
                                 coinzilla_display.push(c_display_preferences);
-                            </script>-->
+                            </script>
                         </td>`
-      /*  first = false;
+        first = false;
       } else {
         charHtml = '<td class="char-column" colspan="8"></td>'
-      }*/
+      }
     }
     if (charLen < 1) {
       charLen = 1
