@@ -259,8 +259,7 @@ async function loadData() {
     } else {
       if (first) {
         charHtml = `<td class="char-column" colspan="8">
-                      <!--<span id="ct_cH8icOIcl5J"></span>-->
-                            <div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
+                      <div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
                             <script>
                                 window.coinzilla_display = window.coinzilla_display || [];
                                 var c_display_preferences = {};
