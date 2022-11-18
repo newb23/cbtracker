@@ -188,7 +188,7 @@ async function loadData() {
   var skillPartnerId = isGen2 && currentNetwork === 'bnb' ? await getValorPartnerId() : await getSkillPartnerId()
   var skillMultiplier = skillPartnerId ? Number(fromEther(await getProjectMultiplier(skillPartnerId))) : 0
   var skillRatio = skillPartnerId ? await getSkillToPartnerRatio(skillPartnerId) : 0;
-  var first = false;
+  var first = true;
 
   var fRowHtml = await Promise.all(storeAccounts.map(async (address, i) => {
     let rowHtml = ''
@@ -258,18 +258,33 @@ async function loadData() {
                         <td class="char-column" data-sta="${chars[0].charId}">${staminaToColor(chars[0].sta)}<br/>${staminaFullAt(chars[0].sta)}</td>`
     } else {
       if (first) {
-        charHtml = `<td class="char-column" colspan="8">
-                      <ins class="63778cb199a182518a5e8804" style="display:inline-block;width:728px;height:90px;"></ins><script>!function(e,n,c,t,o,r,d){!function e(n,c,t,o,r,m,d,s,a){s=c.getElementsByTagName(t)[0],(a=c.createElement(t)).async=!0,a.src="https://"+r[m]+"/js/"+o+".js?v="+d,a.onerror=function(){a.remove(),(m+=1)>=r.length||e(n,c,t,o,r,m)},s.parentNode.insertBefore(a,s)}(window,document,"script","63778cb199a182518a5e8804",["cdn.bmcdn4.com"], 0, new Date().getTime())}();</script>
-                      <!--<div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
-                            <script>
-                                window.coinzilla_display = window.coinzilla_display || [];
-                                var c_display_preferences = {};
-                                c_display_preferences.zone = "1836231acdf79c70725";
-                                c_display_preferences.width = "728";
-                                c_display_preferences.height = "90";
-                                coinzilla_display.push(c_display_preferences);
-                            </script>-->
-                        </td>`
+        if (!isPhone) {
+          charHtml = `<td class="char-column" colspan="8">
+                      <ins class="63780e0f57ac862609f78069" style="display:inline-block;width:468px;height:90px;"></ins><script>!function(e,n,c,t,o,r,d){!function e(n,c,t,o,r,m,d,s,a){s=c.getElementsByTagName(t)[0],(a=c.createElement(t)).async=!0,a.src="https://"+r[m]+"/js/"+o+".js?v="+d,a.onerror=function(){a.remove(),(m+=1)>=r.length||e(n,c,t,o,r,m)},s.parentNode.insertBefore(a,s)}(window,document,"script","63780e0f57ac862609f78069",["cdn.bmcdn4.com"], 0, new Date().getTime())}();</script>
+                     <!--<div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
+                              <script>
+                                  window.coinzilla_display = window.coinzilla_display || [];
+                                  var c_display_preferences = {};
+                                  c_display_preferences.zone = "1836231acdf79c70725";
+                                  c_display_preferences.width = "728";
+                                  c_display_preferences.height = "90";
+                                  coinzilla_display.push(c_display_preferences);
+                              </script>-->
+                          </td>`
+        } else {
+          charHtml = `<td class="char-column" colspan="8">
+                      <ins class="63780cc6484f9641cff418b8" style="display:inline-block;width:468px;height:60px;"></ins><script>!function(e,n,c,t,o,r,d){!function e(n,c,t,o,r,m,d,s,a){s=c.getElementsByTagName(t)[0],(a=c.createElement(t)).async=!0,a.src="https://"+r[m]+"/js/"+o+".js?v="+d,a.onerror=function(){a.remove(),(m+=1)>=r.length||e(n,c,t,o,r,m)},s.parentNode.insertBefore(a,s)}(window,document,"script","63780cc6484f9641cff418b8",["cdn.bmcdn4.com"], 0, new Date().getTime())}();</script>
+                        <!--<div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
+                              <script>
+                                  window.coinzilla_display = window.coinzilla_display || [];
+                                  var c_display_preferences = {};
+                                  c_display_preferences.zone = "1836231acdf79c70725";
+                                  c_display_preferences.width = "728";
+                                  c_display_preferences.height = "90";
+                                  coinzilla_display.push(c_display_preferences);
+                              </script>-->
+                          </td>`
+        }
         first = false;
       } else {
         charHtml = '<td class="char-column" colspan="8"></td>'
