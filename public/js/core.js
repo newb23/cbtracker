@@ -259,7 +259,8 @@ async function loadData() {
     } else {
       if (first) {
         charHtml = `<td class="char-column" colspan="8">
-                      <div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
+                      <ins class="63778cb199a182518a5e8804" style="display:inline-block;width:728px;height:90px;"></ins><script>!function(e,n,c,t,o,r,d){!function e(n,c,t,o,r,m,d,s,a){s=c.getElementsByTagName(t)[0],(a=c.createElement(t)).async=!0,a.src="https://"+r[m]+"/js/"+o+".js?v="+d,a.onerror=function(){a.remove(),(m+=1)>=r.length||e(n,c,t,o,r,m)},s.parentNode.insertBefore(a,s)}(window,document,"script","63778cb199a182518a5e8804",["cdn.bmcdn4.com"], 0, new Date().getTime())}();</script>
+                      <!--<div class="coinzilla" data-zone="C-1836231acdf79c70725"></div>
                             <script>
                                 window.coinzilla_display = window.coinzilla_display || [];
                                 var c_display_preferences = {};
@@ -267,7 +268,7 @@ async function loadData() {
                                 c_display_preferences.width = "728";
                                 c_display_preferences.height = "90";
                                 coinzilla_display.push(c_display_preferences);
-                            </script>
+                            </script>-->
                         </td>`
         first = false;
       } else {
