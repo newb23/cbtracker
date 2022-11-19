@@ -17,6 +17,7 @@ var usdPrice = 0
 var gasPrice = 0
 var totalSouls = 0
 var $table = $('#table-accounts tbody')
+var isPhone = $('body').data('is-phone').isPhone;
 
 if (!currCurrency) currCurrency = 'usd'
 if (accounts && names) {
