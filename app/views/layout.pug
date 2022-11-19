@@ -27,7 +27,8 @@ html#main(lang='en')
       gtag('config', 'G-2C7J6DL9GR');
 
 
-  body(style='background-color: #12263f' data-is-phone={isPhone})
+  body(style='background-color: #12263f' data-is-phone=`${isPhone}` data-ad-type=`${adType}`)
+    //body(style='background-color: #12263f' data-is-phone=${isPhone} data-ad-type=${adType})
     block content
 
     script(type='text/javascript' src='/build/js/contracts-min.js')
